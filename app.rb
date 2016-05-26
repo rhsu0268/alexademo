@@ -19,15 +19,15 @@ post '/' do
       }
     }'
   else
-    @sku_amount = @request_payload['request']['intent']['slots']['Item']['value']
-    puts @sku_amount
+    @character = @request_payload['request']['intent']['slots']['Character']['value']
+    puts @character
 
     '{
       "version": "1.0",
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": "There are 12 units of ' + @sku_amount + ' in stock."
+          "text": "The character ' + @character + ' is a Marvel Comic character"
         },
         "shouldEndSession": true
       }
