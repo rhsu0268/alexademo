@@ -19,7 +19,7 @@ post '/' do
       }
     }'
   else
-    @character = @request_payload['request']['intent']['slots']['Person']['value']
+    @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
 
     '{
