@@ -27,7 +27,7 @@ post '/' do
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": "The character you asked for is ' + @character + '.' + @character + " is a Marvel Comic character."
+          "text": "The character you asked for is  ' + @character + '." 
         },
         "shouldEndSession": true
       }
