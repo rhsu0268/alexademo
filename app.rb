@@ -25,14 +25,14 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
 
-    @result = getDescription(name)
+    result = getDescription(@character)
 
     '{
       "version": "1.0",
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": @result
+          "text": result
         },
         "shouldEndSession": true
       }
