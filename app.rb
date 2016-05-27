@@ -31,18 +31,19 @@ post '/' do
     puts "---RESULT---"
     puts result
 
-    result = {
+
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end
 
@@ -61,6 +62,31 @@ get '/query-api' do
   getDescription(name)
 end 
 
+
+
+get '/query-star-wars-character' do
+  name = "Arm"
+  character = queryStarWarsForCharacters(name)
+  puts character
+end
+
+
+
+get '/query-all-characters' do
+  name = "Luke Skywalker"
+  characters = getAllCharacters()
+  character = getCharacterName(characters, name)
+end
+
+
+
+get '/query-for-field' do
+  name = "Luke Skywalker"
+  #characters = getAllCharacters()
+  characters = getAllCharacters()
+  character = getCharacterInfoField(characters, name, 'hair_color')
+end
+
 def getDescription(name)
   response = queryAPI(name)
   #puts response
@@ -73,6 +99,8 @@ def getDescription(name)
   return response['data']['results'][0]['description']
 
 end
+
+
 
 
 def queryAPI(name)
@@ -94,5 +122,100 @@ def queryAPI(name)
   puts url
   return HTTParty.get(url)
  
+end 
+
+
+
+def queryStarWarsForCharacters(name)
+  url = 'http://swapi.co/api/people'
+  puts url 
+  data = HTTParty.get(url)['results']
+
+  #out_file = File.new("character.txt", "w")
+  #out_file.puts(data)
+  #out_file.close
+
+
+  pages = []
+
+  i = 1
+
+  while i < 5 do 
+
+    puts("Loop ")
+    i += 1 
+    url_page = 'http://swapi.co/api/people/?page=' + i.to_s
+    puts url_page
+    characters = HTTParty.get(url)['results']
+    #puts characters
+
+    pages += [characters]
+
+  end 
+
+  #puts pages
+
+
+  # loop over data in json array
+  data.each do |character|
+    puts character['name']
+    if name == character['name']
+      return character['name']
+    else
+      return "Sorry. I cannot find that character."
+    end 
+  end 
+end 
+
+
+def getAllCharacters()
+  charactersList = []
+
+  i = 1
+
+  while i < 8 do 
+
+    puts("Loop ") 
+    url_page = 'http://swapi.co/api/people/?page=' + i.to_s
+    puts url_page
+    characters = HTTParty.get(url_page)['results']
+    #puts "---Characters---"
+    #puts characters
+
+    characters.each do |character|
+      #puts character['name']
+      charactersList << character
+    end 
+
+    i += 1
+
+  end 
+  #puts charactersList
+  return charactersList
+end 
+
+
+def getCharacterName(characters, name)
+  puts name
+  characters.each do |character|
+    puts character['name']
+    if name == character['name']
+      return name
+    end 
+  end 
+  return "Sorry. I cannot find that character."
+end 
+
+
+def getCharacterInfoField(characters, name, option)
+  puts name 
+  puts option
+  characters.each do |character|
+    #puts character['name']
+    if name == character['name']
+      return character[option]
+    end 
+  end 
+  return "Sorry. I cannot find that character."
 end 
 
