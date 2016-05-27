@@ -26,7 +26,7 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
-    if @character == 'The Force Awakens' 
+    if @character.downcase == 'the force awakens' 
 
       films = getFilms()
       result = getFilmCrawl(films, @character)
