@@ -31,7 +31,8 @@ post '/' do
     puts "---RESULT---"
     puts result
 
-    '{
+    result = {
+  
       "version": "1.0",
       "response": {
         "outputSpeech": {
@@ -40,8 +41,8 @@ post '/' do
          },
         "shouldEndSession": true
       }
-    }'
-    #JSON.generate(response)
+    }
+    JSON.generate(result)
   end
 end
 
