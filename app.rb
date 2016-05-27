@@ -39,7 +39,7 @@ post '/' do
       films = getFilms()
       result = getFilmCrawl(films, @character)
       puts "---FILMS---"
-      puts result
+      #puts result
     else 
       characters = getAllCharacters()
       result = getCharacterInfoString(characters, @character)
