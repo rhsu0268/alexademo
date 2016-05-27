@@ -26,7 +26,7 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
-    if @character == 'The Force Awakens' || @character == 'The Empire Strikes Back' || @character == 'Return of the Jedi' || @character == 'The Force Awakens' || @character == 'Revenge of the Sith' || @character = 'The Phantom Menace' || @character == 'A New Hope'
+    if @character == 'The Force Awakens' 
 
       films = getFilms()
       result = getFilmCrawl(films, @character)
