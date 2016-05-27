@@ -31,7 +31,6 @@ post '/' do
 
       films = getFilms()
       result = getFilmCrawl(films, @character)
-      puts result
       puts "---FILMS---"
       puts result
     else 
