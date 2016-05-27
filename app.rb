@@ -30,9 +30,10 @@ post '/' do
     puts @characterLower
     if @characterLower == 'the force awakens' 
 
-      @character.split.map(&:capitalize).join(' ')
-
+      
+      puts @character
       puts "Capitalizing "
+      @character.split.map(&:capitalize).join(' ')
       puts @character
       films = getFilms()
       result = getFilmCrawl(films, @character)
