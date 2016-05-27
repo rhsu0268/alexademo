@@ -41,7 +41,7 @@ post '/' do
 end
 
 get '/api-key-hash' do 
-  name = 'spider'
+  name = 'Batman'
   puts name
 
   response = queryAPI(name)
@@ -51,17 +51,18 @@ end
 
 
 get '/query-api' do
-  name = 'Spider-Man'
+  name = 'thor'
   getDescription(name)
 end 
 
 def getDescription(name)
   response = queryAPI(name)
-
+  #puts response
   #puts api_res
   puts "---Results---"
 
   #puts response['data']['results']
+  #puts response['data']['results'][0]
 
   return response['data']['results'][0]['description']
 
@@ -79,9 +80,9 @@ def queryAPI(name)
   hash = Digest::MD5.hexdigest(ts + private_key + api_key)
   puts hash 
 
-  url = 'http://gateway.marvel.com:80/v1/public/characters?nameStartsWith=' + name + '&ts=' + ts + '&apikey=b9bcb26854f616624e110c29e43b133c&hash=' + hash
+  url = 'http://gateway.marvel.com:80/v1/public/characters?name=' + name + '&ts=' + ts + '&apikey=b9bcb26854f616624e110c29e43b133c&hash=' + hash
   #puts url
-  return HTTParty.get(url).parsed_response
+  return HTTParty.get(url)
  
 end 
 
