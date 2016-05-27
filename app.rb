@@ -33,8 +33,8 @@ post '/' do
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": result
-        },
+          "text": "Here is a description of the character' + result + '"
+         },
         "shouldEndSession": true
       }
     }'
