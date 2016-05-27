@@ -28,7 +28,8 @@ post '/' do
     puts @character
 
     result = getDescription(@character)
-    #puts result
+    puts "---RESULT---"
+    puts result
 
     '{
       "version": "1.0",
@@ -88,7 +89,8 @@ def queryAPI(name)
   puts hash 
 
   url = 'http://gateway.marvel.com:80/v1/public/characters?name=' + name + '&ts=' + ts + '&apikey=b9bcb26854f616624e110c29e43b133c&hash=' + hash
-  #puts url
+  puts "---URL---"
+  puts url
   return HTTParty.get(url)
  
 end 
