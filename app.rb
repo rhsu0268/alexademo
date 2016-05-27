@@ -33,7 +33,7 @@ post '/' do
       
       puts @character
       puts "Capitalizing "
-      @character.split.map(&:capitalize).join(' ')
+      @character.split.map(&:capitalize).*' '
       puts @character
       films = getFilms()
       result = getFilmCrawl(films, @character)
