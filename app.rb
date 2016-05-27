@@ -25,8 +25,9 @@ post '/' do
     }'
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
-    puts @character
-    if @character.downcase == 'the force awakens' 
+    @characterLower = @character.downcase
+    puts @characterLower
+    if @characterLower == 'the force awakens' 
 
       films = getFilms()
       result = getFilmCrawl(films, @character)
@@ -40,18 +41,18 @@ post '/' do
       puts result
     end 
 
-    result = {
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end
 
@@ -103,7 +104,7 @@ get '/query-for-string' do
 end
 
 get '/get-films' do
-  title = 'The Force Awakens'
+  title = 'Return of the Jedi'
   films = getFilms()
   getFilmCrawl(films, title)
 
