@@ -27,7 +27,7 @@ post '/' do
 
     result = getDescription(@character)
 
-    '{
+    response = {
       "version": "1.0",
       "response": {
         "outputSpeech": {
@@ -36,7 +36,8 @@ post '/' do
         },
         "shouldEndSession": true
       }
-    }'
+    }
+    JSON.generate(response)
   end
 end
 
