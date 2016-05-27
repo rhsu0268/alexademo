@@ -26,6 +26,7 @@ post '/' do
     puts @character
 
     result = getDescription(@character)
+    puts result
 
     '{
       "version": "1.0",
