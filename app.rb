@@ -25,6 +25,7 @@ post '/' do
     }'
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
+    puts @character
     @characterLower = @character.downcase
     puts @characterLower
     if @characterLower == 'the force awakens' 
