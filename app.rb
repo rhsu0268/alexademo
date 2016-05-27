@@ -29,8 +29,11 @@ post '/' do
     @characterLower = @character.downcase
     puts @characterLower
     if @characterLower == 'the force awakens' 
-      
+
       @character.split.map(&:capitalize).join(' ')
+
+      puts "Capitalizing "
+      puts @character
       films = getFilms()
       result = getFilmCrawl(films, @character)
       puts "---FILMS---"
