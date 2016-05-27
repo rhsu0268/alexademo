@@ -26,12 +26,18 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
+    if @character == 'The Force Awakens' || @character == 'The Empire Strikes Back' || @character == 'Return of the Jedi' || @character == 'The Force Awakens' || @character == 'Revenge of the Sith' || @character = 'The Phantom Menace' || @character == 'A New Hope'
 
-    characters = getAllCharacters()
-    result = getCharacterInfoString(characters, @character)
-    puts "---RESULT---"
-    puts result
-
+      films = getFilms()
+      result = getFilmCrawl(films, title)
+      puts "---RESULT---"
+      puts result
+    else 
+      characters = getAllCharacters()
+      result = getCharacterInfoString(characters, @character)
+      puts "---RESULT---"
+      puts result
+    end 
 
     result = {
   
@@ -93,6 +99,13 @@ get '/query-for-string' do
   name = "Luke Skywalker"
   characters = getAllCharacters()
   character = getCharacterInfoString(characters, name)
+end
+
+get '/get-films' do
+  title = 'The Force Awakens'
+  films = getFilms()
+  getFilmCrawl(films, title)
+
 end
 
 def getDescription(name)
@@ -238,4 +251,22 @@ def getCharacterInfoField(characters, name, option)
   end 
   return "Sorry. I cannot find that character."
 end 
+
+def getFilms()
+  url = 'http://swapi.co/api/films/'
+  puts url 
+  data = HTTParty.get(url)['results']
+  return data
+end 
+
+def getFilmCrawl(films, title)
+  puts title
+  films.each do |film|
+    #puts character['name']
+    if title == film['title']
+      return film['opening_crawl']
+    end 
+  end 
+  return "Sorry. I cannot find that film."
+end
 
