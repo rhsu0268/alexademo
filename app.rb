@@ -26,14 +26,14 @@ post '/' do
     puts @character
 
     result = getDescription(@character)
-    puts result
+    #puts result
 
     '{
       "version": "1.0",
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": result
+          "text":  result
          },
         "shouldEndSession": true
       }
@@ -73,8 +73,8 @@ end
 
 def queryAPI(name)
 
-  api_key = 'b9bcb26854f616624e110c29e43b133c'
-  private_key = '53e0c3ba58218ff98e19d562e57771fdf439e9cf'
+  #api_key = 'b9bcb26854f616624e110c29e43b133c'
+  #private_key = '53e0c3ba58218ff98e19d562e57771fdf439e9cf'
 
   ts = Time.now.strftime("%Y-%m-1")
   #puts ts
