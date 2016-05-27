@@ -26,15 +26,16 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
+    character = @character
     @characterLower = @character.downcase
     puts @characterLower
     if @characterLower == 'the force awakens' 
 
       
-      puts @character
+      puts character
       puts "Capitalizing "
-      @character.split.map(&:capitalize).*' '
-      puts @character
+      character.split.map(&:capitalize).*' '
+      puts character
       films = getFilms()
       result = getFilmCrawl(films, @character)
       puts "---FILMS---"
