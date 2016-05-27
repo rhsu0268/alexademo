@@ -27,7 +27,8 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
 
-    result = getDescription(@character)
+    characters = getAllCharacters()
+    result = getCharacterInfoString(characters, @character)
     puts "---RESULT---"
     puts result
 
@@ -85,6 +86,13 @@ get '/query-for-field' do
   #characters = getAllCharacters()
   characters = getAllCharacters()
   character = getCharacterInfoField(characters, name, 'hair_color')
+end
+
+
+get '/query-for-string' do
+  name = "Luke Skywalker"
+  characters = getAllCharacters()
+  character = getCharacterInfoString(characters, name)
 end
 
 def getDescription(name)
@@ -201,6 +209,18 @@ def getCharacterName(characters, name)
     puts character['name']
     if name == character['name']
       return name
+    end 
+  end 
+  return "Sorry. I cannot find that character."
+end 
+
+def getCharacterInfoString(characters, name)
+  puts name
+  characters.each do |character|
+    puts character['name']
+    if name == character['name']
+      return "You wanted to know about " + character['name'] + ". 
+      He is " + character['height'] + " centimeters tall and weighs " + character['mass'] + " kilograms."
     end 
   end 
   return "Sorry. I cannot find that character."
