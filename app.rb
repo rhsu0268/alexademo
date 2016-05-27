@@ -3,6 +3,8 @@ require 'json'
 require 'net/http'
 require 'httparty'
 require 'digest/md5'
+require 'rack/env'
+#use Rack::Env, envfile: 'config/local_env.yml'
 
 post '/' do
   request.body.rewind
@@ -33,7 +35,7 @@ post '/' do
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text":  result
+          "text": result
          },
         "shouldEndSession": true
       }
@@ -43,7 +45,7 @@ post '/' do
 end
 
 get '/api-key-hash' do 
-  name = 'Batman'
+  name = 'thor'
   puts name
 
   response = queryAPI(name)
@@ -73,8 +75,11 @@ end
 
 def queryAPI(name)
 
-  #api_key = 'b9bcb26854f616624e110c29e43b133c'
-  #private_key = '53e0c3ba58218ff98e19d562e57771fdf439e9cf'
+  api_key = 'b9bcb26854f616624e110c29e43b133c'
+  private_key = '53e0c3ba58218ff98e19d562e57771fdf439e9cf'
+
+  #api_key = ENV["API_KEY"]
+  #puts api_key
 
   ts = Time.now.strftime("%Y-%m-1")
   #puts ts
