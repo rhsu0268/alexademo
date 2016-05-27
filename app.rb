@@ -29,7 +29,7 @@ post '/' do
     if @character == 'the force awakens' || @character == 'the empire strikes back' || @character == 'return of the jedi' || @character == 'the force awakens' || @character == 'revenge of the sith' || @character = 'the phantom menace' || @character == 'a new hope'
 
       films = getFilms()
-      result = getFilmCrawl(films, title)
+      result = getFilmCrawl(films, @character)
       puts "---FILMS---"
       puts result
     else 
