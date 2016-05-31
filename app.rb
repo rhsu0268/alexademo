@@ -4,7 +4,7 @@ require 'net/http'
 require 'httparty'
 require 'digest/md5'
 require 'rack/env'
-require './marvel/marvel'
+#require './marvel/marvel'
 #use Rack::Env, envfile: 'config/local_env.yml'
 
 post '/' do
