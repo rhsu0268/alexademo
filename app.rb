@@ -262,20 +262,23 @@ def isMovie(title)
     if titleLowercase == 'attack of the clones'
         formattedFilm = 'Attack of the Clones'
         puts formattedFilm
+        return formattedFilm 
     elsif titleLowercase == 'revenge of the sith'
         formattedFilm = 'Revenge of the Sith'
         puts formattedFilm
+        return formattedFilm 
     elsif titleLowercase == 'return of the jedi'
         formattedFilm = 'Return of the Jedi'
         puts formattedFilm
+        return formattedFilm 
     else
-        puts filmOrCharacterTest
         puts "Capitalizing "
         formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
         puts formattedFilm
+        return formattedFilm
     end
   else 
-    puts "Sorry. I cannot find that film."
+    return "Sorry. I cannot find that film."
   end 
 end 
 
