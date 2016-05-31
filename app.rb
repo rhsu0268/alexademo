@@ -273,7 +273,7 @@ def isMovie(title)
         return formattedFilm 
     else
         puts "Capitalizing "
-        formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
+        formattedFilm = title.split.map(&:capitalize).*' '
         puts formattedFilm
         return formattedFilm
     end
