@@ -31,7 +31,7 @@ post '/' do
     species = getSpecies()
     specie = getSpecie(species, @character)
     if specie
-      result = "You wanted to know about a specie."
+      result = specie
     filmOrCharacterTest = @character.downcase
     elsif filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
 
