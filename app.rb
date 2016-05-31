@@ -28,32 +28,20 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
 
+    filmOrCharacterTest = @character.downcase
+
     species = getSpecies()
     specie = getSpecie(species, @character)
-    if specie
-      result = specie
-    filmOrCharacterTest = @character.downcase
-    elsif filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
 
-      if filmOrCharacterTest == 'attack of the clones'
-        formattedFilm = 'Attack of the Clones'
-        puts formattedFilm
-      elsif filmOrCharacterTest == 'revenge of the sith'
-        formattedFilm = 'Revenge of the Sith'
-        puts formattedFilm
-      elsif filmOrCharacterTest == 'return of the jedi'
-        formattedFilm = 'Return of the Jedi'
-        puts formattedFilm
-      else
-        puts filmOrCharacterTest
-        puts "Capitalizing "
-        formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
-        puts formattedFilm
-      end
-      films = getFilms()
-      result = getFilmCrawl(films, formattedFilm)
-      puts "---FILMS---"
-      puts result
+
+    films = getFilms()
+    film = isMovie(@character)
+    formattedFilm = getFilmCrawl(films, formattedFilm)
+
+    if specie != "Sorry. I cannot find that species."
+      result = specie
+    elsif formattedFilm != "Sorry. I cannot find that film."
+      result = formattedFilm
     else 
       puts "---CHARACTER---"
       puts @character
@@ -140,6 +128,11 @@ get '/get-all-species' do
   species = getSpecies()
   getSpecie(species, 'Zabrak')
   #puts species
+end 
+
+get '/isMovie' do
+  movie = isMovie("return of the jedi")
+  puts movie 
 end 
 
 def queryStarWarsForCharacters(name)
@@ -261,6 +254,31 @@ def getFilmCrawl(films, title)
   return "Sorry. I cannot find that film."
 end
 
+
+
+def isMovie(title)
+  titleLowercase = title.downcase
+  if titleLowercase == 'the force awakens' or titleLowercase == 'a new hope' or titleLowercase == 'the empire strikes back' or titleLowercase == 'attack of the clones' or titleLowercase== 'the phantom menace' or titleLowercase == 'revenge of the sith' or titleLowercase == 'return of the jedi' 
+    if titleLowercase == 'attack of the clones'
+        formattedFilm = 'Attack of the Clones'
+        puts formattedFilm
+    elsif titleLowercase == 'revenge of the sith'
+        formattedFilm = 'Revenge of the Sith'
+        puts formattedFilm
+    elsif titleLowercase == 'return of the jedi'
+        formattedFilm = 'Return of the Jedi'
+        puts formattedFilm
+    else
+        puts filmOrCharacterTest
+        puts "Capitalizing "
+        formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
+        puts formattedFilm
+    end
+  else 
+    puts "Sorry. I cannot find that film."
+  end 
+end 
+
 ########### Marvel API Code ############
 # Note that this version will not work for Alex #
 get '/api-key-hash' do 
@@ -319,13 +337,12 @@ def getSpecies()
 end
 
 def getSpecie(species, name)
-  puts name
   species.each do |specie|
-    #puts character['name']
+    puts specie['name']
     if name == specie['name']
       return "You want to know about " + specie['name'] + ". The species falls under the classification " + specie['classification'] + " and designation " + specie['designation'] + "."
     end 
   end 
-  return "Sorry. I cannot find that film."
+  return "Sorry. I cannot find that species."
 end
 
