@@ -36,7 +36,7 @@ post '/' do
 
     films = getFilms()
     film = isMovie(@character)
-    formattedFilm = getFilmCrawl(films, formattedFilm)
+    formattedFilm = getFilmCrawl(films, film)
 
     if specie != "Sorry. I cannot find that species."
       result = specie
@@ -260,17 +260,11 @@ def isMovie(title)
   titleLowercase = title.downcase
   if titleLowercase == 'the force awakens' or titleLowercase == 'a new hope' or titleLowercase == 'the empire strikes back' or titleLowercase == 'attack of the clones' or titleLowercase== 'the phantom menace' or titleLowercase == 'revenge of the sith' or titleLowercase == 'return of the jedi' 
     if titleLowercase == 'attack of the clones'
-        formattedFilm = 'Attack of the Clones'
-        puts formattedFilm
-        return formattedFilm 
+        return 'Attack of the Clones'
     elsif titleLowercase == 'revenge of the sith'
-        formattedFilm = 'Revenge of the Sith'
-        puts formattedFilm
-        return formattedFilm 
+        return 'Revenge of the Sith' 
     elsif titleLowercase == 'return of the jedi'
-        formattedFilm = 'Return of the Jedi'
-        puts formattedFilm
-        return formattedFilm 
+        return 'Return of the Jedi'
     else
         puts "Capitalizing "
         formattedFilm = title.split.map(&:capitalize).*' '
