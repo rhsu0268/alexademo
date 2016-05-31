@@ -27,7 +27,7 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
     
-    filmOrCharacterTest = @character.downcase!
+    filmOrCharacterTest = @character.downcase
     if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back'
 
       
