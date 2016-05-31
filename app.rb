@@ -51,18 +51,18 @@ post '/' do
       puts result
     end 
 
-    # result = {
+    result = {
   
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": result
-    #      },
-    #     "shouldEndSession": true
-    #   }
-    # }
-    # JSON.generate(result)
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": true
+      }
+    }
+    JSON.generate(result)
   end
 end
 
