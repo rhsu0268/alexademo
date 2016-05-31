@@ -32,9 +32,9 @@ post '/' do
     specie = getSpecie(species, @character)
     if specie
       result = "You wanted to know about a specie."
-
+    end 
     filmOrCharacterTest = @character.downcase
-    elsif filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
+    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
 
       if filmOrCharacterTest == 'attack of the clones'
         formattedFilm = 'Attack of the Clones'
