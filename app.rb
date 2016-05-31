@@ -26,21 +26,20 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
-    character = @character
-    #@characterLower = @character.downcase
-    #puts @characterLower
-    # if @characterLower == 'The Force Awakens' 
+    
+    filmOrCharacterTest = @character.downcase!
+    if filmOrCharacterTest == 'the force awakens' 
 
       
-    #   puts character
-    #   puts "Capitalizing "
-    #   character.split.map(&:capitalize).*' '
-    #   puts character
-    #   films = getFilms()
-    #   result = getFilmCrawl(films, @character)
-    #   puts "---FILMS---"
-    #   #puts result
-    # else 
+      puts filmOrCharacterTest
+      puts "Capitalizing "
+      formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
+      puts formattedFilm
+      films = getFilms()
+      result = getFilmCrawl(films, formattedFilm)
+      puts "---FILMS---"
+      puts result
+    else 
     characters = getAllCharacters()
     result = getCharacterInfoString(characters, @character)
     puts "---RESULT---"
@@ -117,11 +116,11 @@ get '/get-films' do
 end
 
 
-get '/get-formatted-files' do 
+get '/get-formatted-films' do 
   title = 'a new age'
   #files.getFilms()
-  title.split.map(&:capitalize).*' '
-  puts title
+  capital = title.split.map(&:capitalize).*' '
+  puts capital
 
 end 
 
