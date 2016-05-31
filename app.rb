@@ -32,15 +32,16 @@ post '/' do
 
       if filmOrCharacterTest == 'attack of the clones'
         formattedFilm = 'Attack of the Clones'
+        puts formattedFilm
       else
         puts filmOrCharacterTest
         puts "Capitalizing "
         formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
         puts formattedFilm
-        films = getFilms()
-        result = getFilmCrawl(films, formattedFilm)
-        puts "---FILMS---"
-        puts result
+      films = getFilms()
+      result = getFilmCrawl(films, formattedFilm)
+      puts "---FILMS---"
+      puts result
       end 
     else 
       puts "---CHARACTER---"
