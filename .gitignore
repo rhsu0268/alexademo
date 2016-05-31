@@ -34,3 +34,5 @@ build/
 .rvmrc
 
 config/local_env.yml
+
+marvel/marvel.rb
