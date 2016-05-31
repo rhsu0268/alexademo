@@ -27,9 +27,15 @@ post '/' do
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
+
+    species = getSpecies()
+    specie = getSpecie(species, @character)
+    if specie:
+      result = "You wanted to know about a specie."
+    end 
     
     filmOrCharacterTest = @character.downcase
-    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
+    elsif filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
 
       if filmOrCharacterTest == 'attack of the clones'
         formattedFilm = 'Attack of the Clones'
@@ -50,7 +56,6 @@ post '/' do
       result = getFilmCrawl(films, formattedFilm)
       puts "---FILMS---"
       puts result
-       
     else 
       puts "---CHARACTER---"
       puts @character
@@ -60,18 +65,18 @@ post '/' do
       puts result
     end 
 
-    result = {
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end 
 
@@ -131,6 +136,12 @@ get '/get-formatted-films' do
       puts result
     end
 
+end 
+
+get '/get-all-species' do
+  species = getSpecies()
+  getSpecie(species, 'Zabrak')
+  #puts species
 end 
 
 def queryStarWarsForCharacters(name)
@@ -280,5 +291,43 @@ def getDescription(name)
 
   return response['data']['results'][0]['description']
 
+end
+
+
+def getSpecies()
+  speciesList = []
+
+  i = 1
+
+  while i < 5 do 
+
+    puts("Loop ") 
+    url_page = 'http://swapi.co/api/species/?page=' + i.to_s
+    puts url_page
+    species = HTTParty.get(url_page)['results']
+    #puts "---Characters---"
+    #puts characters
+
+    species.each do |specie|
+      #puts character['name']
+      speciesList << specie
+    end 
+
+    i += 1
+
+  end 
+  #puts charactersList
+  return speciesList
+end
+
+def getSpecie(species, name)
+  puts name
+  species.each do |specie|
+    #puts character['name']
+    if name == specie['name']
+      return "You want to know about " + specie['name'] + ". The species falls under the classification " + specie['classification'] + " and designation " + specie['designation'] + "."
+    end 
+  end 
+  return "Sorry. I cannot find that film."
 end
 
