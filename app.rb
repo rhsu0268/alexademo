@@ -28,17 +28,20 @@ post '/' do
     puts @character
     
     filmOrCharacterTest = @character.downcase
-    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back'
+    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace'
 
-      
-      puts filmOrCharacterTest
-      puts "Capitalizing "
-      formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
-      puts formattedFilm
-      films = getFilms()
-      result = getFilmCrawl(films, formattedFilm)
-      puts "---FILMS---"
-      puts result
+      if filmOrCharacterTest == 'attack of the clones'
+        formattedFilm = 'Attack of the Clones'
+      else
+        puts filmOrCharacterTest
+        puts "Capitalizing "
+        formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
+        puts formattedFilm
+        films = getFilms()
+        result = getFilmCrawl(films, formattedFilm)
+        puts "---FILMS---"
+        puts result
+      end 
     else 
       puts "---CHARACTER---"
       puts @character
@@ -48,18 +51,18 @@ post '/' do
       puts result
     end 
 
-    result = {
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end
 
@@ -258,7 +261,8 @@ def getCharacterInfoString(characters, name)
     puts character['name']
     if name == character['name']
       return "You wanted to know about " + character['name'] + ". 
-      He is " + character['height'] + " centimeters tall and weighs " + character['mass'] + " kilograms."
+      The character is " + character['height'] + " centimeters tall and weighs " + character['mass'] + " kilograms." + " 
+      The character has " + character['hair_color'] + " hair and " + character['skin_color'] + " skin color."
     end 
   end 
   return "Sorry. I cannot find that character."
