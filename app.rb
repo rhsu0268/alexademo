@@ -44,7 +44,7 @@ post '/' do
     result = getCharacterInfoString(characters, @character)
     puts "---RESULT---"
     puts result
-    # end 
+    end 
 
     # result = {
   
@@ -117,10 +117,17 @@ end
 
 
 get '/get-formatted-films' do 
-  title = 'a new age'
-  #files.getFilms()
-  capital = title.split.map(&:capitalize).*' '
-  puts capital
+    filmOrCharacterTest = 'the Force awakens'.downcase!
+    if filmOrCharacterTest == 'the force awakens' 
+      puts filmOrCharacterTest
+      puts "Capitalizing "
+      formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
+      puts formattedFilm
+      films = getFilms()
+      result = getFilmCrawl(films, formattedFilm)
+      puts "---FILMS---"
+      puts result
+    end
 
 end 
 
