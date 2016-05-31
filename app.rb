@@ -41,6 +41,7 @@ post '/' do
       puts result
     else 
       puts "---CHARACTER---"
+      puts @character
       characters = getAllCharacters()
       result = getCharacterInfoString(characters, @character)
       puts "---RESULT---"
