@@ -47,18 +47,18 @@ post '/' do
     puts result
     # end 
 
-    result = {
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end
 
@@ -115,6 +115,15 @@ get '/get-films' do
   getFilmCrawl(films, title)
 
 end
+
+
+get '/get-formatted-files' do 
+  title = 'a new age'
+  #files.getFilms()
+  title.split.map(&:capitalize).*' '
+  puts title
+
+end 
 
 def getDescription(name)
   response = queryAPI(name)
