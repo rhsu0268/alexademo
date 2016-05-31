@@ -60,23 +60,25 @@ post '/' do
       puts result
     end 
 
-    # result = {
+    result = {
   
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": result
-    #      },
-    #     "shouldEndSession": true
-    #   }
-    # }
-    # JSON.generate(result)
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": true
+      }
+    }
+    JSON.generate(result)
   end
 end 
 
 
+# Demo routes for testing purposes
 
+# test route for query for a Star Wars character
 get '/query-star-wars-character' do
   name = "Arm"
   character = queryStarWarsForCharacters(name)
@@ -84,7 +86,7 @@ get '/query-star-wars-character' do
 end
 
 
-
+# test route for query for a Star Wars 
 get '/query-all-characters' do
   name = "Luke Skywalker"
   characters = getAllCharacters()
@@ -92,7 +94,7 @@ get '/query-all-characters' do
 end
 
 
-
+# test route for query of one specific attribute
 get '/query-for-field' do
   name = "Luke Skywalker"
   #characters = getAllCharacters()
@@ -100,13 +102,14 @@ get '/query-for-field' do
   character = getCharacterInfoField(characters, name, 'hair_color')
 end
 
-
+# test route for query of one specific character description
 get '/query-for-string' do
   name = "Luke Skywalker"
   characters = getAllCharacters()
   character = getCharacterInfoString(characters, name)
 end
 
+# test route for getting the film crawl for a character
 get '/get-films' do
   title = 'Return of the Jedi'
   films = getFilms()
@@ -114,7 +117,7 @@ get '/get-films' do
 
 end
 
-
+# test route for movies that have lower case characters in them 
 get '/get-formatted-films' do 
     filmOrCharacterTest = 'a New hope'.downcase!
     if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope'
