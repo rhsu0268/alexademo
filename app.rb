@@ -28,10 +28,16 @@ post '/' do
     puts @character
     
     filmOrCharacterTest = @character.downcase
-    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace'
+    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back' or filmOrCharacterTest == 'attack of the clones' or filmOrCharacterTest == 'the phantom menace' or filmOrCharacterTest == 'revenge of the sith' or filmOrCharacterTest == 'return of the jedi' 
 
       if filmOrCharacterTest == 'attack of the clones'
         formattedFilm = 'Attack of the Clones'
+        puts formattedFilm
+      elsif filmOrCharacterTest == 'revenge of the sith'
+        formattedFilm = 'Revenge of the Sith'
+        puts formattedFilm
+      elsif filmOrCharacterTest == 'return of the jedi'
+        formattedFilm = 'Return of the Jedi'
         puts formattedFilm
       else
         puts filmOrCharacterTest
