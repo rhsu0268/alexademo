@@ -28,7 +28,7 @@ post '/' do
     puts @character
     
     filmOrCharacterTest = @character.downcase!
-    if filmOrCharacterTest == 'the force awakens' 
+    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope' or filmOrCharacterTest == 'the empire strikes back'
 
       
       puts filmOrCharacterTest
@@ -46,18 +46,18 @@ post '/' do
     puts result
     end 
 
-    # result = {
+    result = {
   
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": result
-    #      },
-    #     "shouldEndSession": true
-    #   }
-    # }
-    # JSON.generate(result)
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": true
+      }
+    }
+    JSON.generate(result)
   end
 end
 
@@ -117,8 +117,8 @@ end
 
 
 get '/get-formatted-films' do 
-    filmOrCharacterTest = 'the Force awakens'.downcase!
-    if filmOrCharacterTest == 'the force awakens' 
+    filmOrCharacterTest = 'a New hope'.downcase!
+    if filmOrCharacterTest == 'the force awakens' or filmOrCharacterTest == 'a new hope'
       puts filmOrCharacterTest
       puts "Capitalizing "
       formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
