@@ -40,10 +40,11 @@ post '/' do
       puts "---FILMS---"
       puts result
     else 
-    characters = getAllCharacters()
-    result = getCharacterInfoString(characters, @character)
-    puts "---RESULT---"
-    puts result
+      puts "CHARACTER "
+      characters = getAllCharacters()
+      result = getCharacterInfoString(characters, @character)
+      puts "---RESULT---"
+      puts result
     end 
 
     result = {
