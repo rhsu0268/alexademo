@@ -38,11 +38,12 @@ post '/' do
         puts "Capitalizing "
         formattedFilm = filmOrCharacterTest.split.map(&:capitalize).*' '
         puts formattedFilm
+      end
       films = getFilms()
       result = getFilmCrawl(films, formattedFilm)
       puts "---FILMS---"
       puts result
-      end 
+       
     else 
       puts "---CHARACTER---"
       puts @character
