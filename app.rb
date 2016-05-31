@@ -28,8 +28,6 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
 
-    filmOrCharacterTest = @character.downcase
-
     species = getSpecies()
     specie = getSpecie(species, @character)
 
@@ -38,17 +36,17 @@ post '/' do
     film = isMovie(@character)
     formattedFilm = getFilmCrawl(films, film)
 
+    characters = getAllCharacters()
+    character = getCharacterInfoString(characters, @character)
+
     if specie != "Sorry. I cannot find that species."
       result = specie
     elsif formattedFilm != "Sorry. I cannot find that film."
       result = formattedFilm
-    else 
-      puts "---CHARACTER---"
-      puts @character
-      characters = getAllCharacters()
-      result = getCharacterInfoString(characters, @character)
-      puts "---RESULT---"
-      puts result
+    elsif character != "Sorry. I cannot find that character."
+      result = character
+    else
+      result = "I don't know what you are talking about. Try again."
     end 
 
     result = {
