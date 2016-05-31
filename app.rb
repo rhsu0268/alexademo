@@ -135,11 +135,6 @@ def queryStarWarsForCharacters(name)
   puts url 
   data = HTTParty.get(url)['results']
 
-  #out_file = File.new("character.txt", "w")
-  #out_file.puts(data)
-  #out_file.close
-
-
   pages = []
 
   i = 1
@@ -254,7 +249,8 @@ def getFilmCrawl(films, title)
   return "Sorry. I cannot find that film."
 end
 
-
+########### Marvel API Code ############
+# Note that this version will not work for Alex #
 get '/api-key-hash' do 
   name = 'thor'
   puts name
