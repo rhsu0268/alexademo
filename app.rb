@@ -27,25 +27,25 @@ post '/' do
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
     character = @character
-    @characterLower = @character.downcase
-    puts @characterLower
-    if @characterLower == 'the force awakens' 
+    #@characterLower = @character.downcase
+    #puts @characterLower
+    # if @characterLower == 'The Force Awakens' 
 
       
-      puts character
-      puts "Capitalizing "
-      character.split.map(&:capitalize).*' '
-      puts character
-      films = getFilms()
-      result = getFilmCrawl(films, @character)
-      puts "---FILMS---"
-      #puts result
-    else 
-      characters = getAllCharacters()
-      result = getCharacterInfoString(characters, @character)
-      puts "---RESULT---"
-      puts result
-    end 
+    #   puts character
+    #   puts "Capitalizing "
+    #   character.split.map(&:capitalize).*' '
+    #   puts character
+    #   films = getFilms()
+    #   result = getFilmCrawl(films, @character)
+    #   puts "---FILMS---"
+    #   #puts result
+    # else 
+    characters = getAllCharacters()
+    result = getCharacterInfoString(characters, @character)
+    puts "---RESULT---"
+    puts result
+    # end 
 
     result = {
   
