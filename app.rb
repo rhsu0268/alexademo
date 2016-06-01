@@ -26,6 +26,20 @@ post '/' do
         "shouldEndSession": true
       }
     }'
+  elsif @request_payload['request']['intent']['name'] == 'AMAZON.CancelIntent'
+
+    response = {
+  
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": "Goodbye. See you later..."
+         },
+        "shouldEndSession": true
+        }
+      }
+      JSON.generate(response)
   else
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
