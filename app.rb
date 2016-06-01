@@ -35,7 +35,7 @@ post '/' do
       result = "You asked for something else."
 
 
-      result = {
+      response = {
   
       "version": "1.0",
       "response": {
@@ -46,7 +46,7 @@ post '/' do
         "shouldEndSession": true
         }
       }
-      JSON.generate(result)
+      JSON.generate(response)
     else
       species = getSpecies()
       specie = getSpecie(species, @input)
@@ -77,7 +77,7 @@ post '/' do
       end 
   
 
-      result = {
+      response = {
     
         "version": "1.0",
         "sessionAttributes": {
@@ -92,7 +92,7 @@ post '/' do
           "shouldEndSession": false
         }
       }
-      JSON.generate(result)
+      JSON.generate(response)
     end
   end
 end 
