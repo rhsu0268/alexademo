@@ -10,6 +10,8 @@ require 'rack/env'
 post '/' do
   request.body.rewind
   @request_payload = JSON.parse request.body.read
+
+  puts "---REQUEST PAYLOAD---"
   puts @request_payload
 
   # type == LaunchRequest
