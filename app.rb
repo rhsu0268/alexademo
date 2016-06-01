@@ -34,6 +34,19 @@ post '/' do
     if @request_payload['session'] != nil
       #['request']['session']['attributes']['input']
       result = "You asked for something else."
+
+      result = {
+  
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": true
+        }
+      }
+      JSON.generate(result)
     else
       species = getSpecies()
       specie = getSpecie(species, @input)
@@ -62,24 +75,24 @@ post '/' do
       else
         result = "I don't know what you are talking about. Try again."
       end 
-    end 
-
-    result = {
   
-      "version": "1.0",
-      "sessionAttributes": {
-        "input": @input
 
-      },
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": false
+      result = {
+    
+        "version": "1.0",
+        "sessionAttributes": {
+          "input": @input
+
+        },
+        "response": {
+          "outputSpeech": {
+            "type": "PlainText",
+            "text": result
+           },
+          "shouldEndSession": false
+        }
       }
-    }
-    JSON.generate(result)
+      JSON.generate(result)
   end
 end 
 
