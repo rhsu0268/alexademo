@@ -97,7 +97,7 @@ def getCharacterHeight(characters, name)
   characters.each do |character|
     #puts character['name']
     if name == character['name']
-      return "The height of " + name + " is " + character['height'] + ' centimeters.'
+      return "The height of " + name + " is " + character['height'] + ' centimeters. Anything else?'
     end 
   end 
   return "Sorry. I cannot find that character's height."

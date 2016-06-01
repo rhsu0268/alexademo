@@ -6,6 +6,7 @@ require 'digest/md5'
 require 'rack/env'
 #require './marvel/marvel'
 require  './character/character'
+require  './films/films'
 #use Rack::Env, envfile: 'config/local_env.yml'
 
 post '/' do
@@ -194,45 +195,7 @@ end
 
 
 
-def getFilms()
-  url = 'http://swapi.co/api/films/'
-  puts url 
-  data = HTTParty.get(url)['results']
-  return data
-end 
 
-def getFilmCrawl(films, title)
-  puts title
-  films.each do |film|
-    #puts character['name']
-    if title == film['title']
-      return film['opening_crawl']
-    end 
-  end 
-  return "Sorry. I cannot find that film."
-end
-
-
-
-def isMovie(title)
-  titleLowercase = title.downcase
-  if titleLowercase == 'the force awakens' or titleLowercase == 'a new hope' or titleLowercase == 'the empire strikes back' or titleLowercase == 'attack of the clones' or titleLowercase== 'the phantom menace' or titleLowercase == 'revenge of the sith' or titleLowercase == 'return of the jedi' 
-    if titleLowercase == 'attack of the clones'
-        return 'Attack of the Clones'
-    elsif titleLowercase == 'revenge of the sith'
-        return 'Revenge of the Sith' 
-    elsif titleLowercase == 'return of the jedi'
-        return 'Return of the Jedi'
-    else
-        puts "Capitalizing "
-        formattedFilm = title.split.map(&:capitalize).*' '
-        puts formattedFilm
-        return formattedFilm
-    end
-  else 
-    return "Sorry. I cannot find that film."
-  end 
-end 
 
 ########### Marvel API Code ############
 # Note that this version will not work for Alex #
@@ -265,41 +228,7 @@ def getDescription(name)
 end
 
 
-def getSpecies()
-  speciesList = []
 
-  i = 1
-
-  while i < 5 do 
-
-    puts("Loop ") 
-    url_page = 'http://swapi.co/api/species/?page=' + i.to_s
-    puts url_page
-    species = HTTParty.get(url_page)['results']
-    #puts "---Characters---"
-    #puts characters
-
-    species.each do |specie|
-      #puts character['name']
-      speciesList << specie
-    end 
-
-    i += 1
-
-  end 
-  #puts charactersList
-  return speciesList
-end
-
-def getSpecie(species, name)
-  species.each do |specie|
-    puts specie['name']
-    if name == specie['name']
-      return "You want to know about " + specie['name'] + ". The species falls under the classification " + specie['classification'] + " and designation " + specie['designation'] + "."
-    end 
-  end 
-  return "Sorry. I cannot find that species."
-end
 
 
 def getPlanets()
