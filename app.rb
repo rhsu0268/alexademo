@@ -61,26 +61,6 @@ post '/' do
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
 
-    if defined?(@request_payload['session']['attributes'])
-      #['request']['session']['attributes']['input']
-
-      puts @request_payload['session']['attributes']
-      result = "You asked for something else."
-
-
-      response = {
-  
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": false
-        }
-      }
-      JSON.generate(response)
-    else
       species = getSpecies()
       specie = getSpecie(species, @input)
 
@@ -126,7 +106,7 @@ post '/' do
         }
       }
       JSON.generate(response)
-    end
+
   end
 end 
 
