@@ -28,22 +28,22 @@ post '/' do
       }
     }
   else
-    @character = @request_payload['request']['intent']['slots']['person']['value']
-    puts @character
+    @input = @request_payload['request']['intent']['slots']['person']['value']
+    puts @input
 
     species = getSpecies()
-    specie = getSpecie(species, @character)
+    specie = getSpecie(species, @input)
 
 
     films = getFilms()
-    film = isMovie(@character)
+    film = isMovie(@input)
     formattedFilm = getFilmCrawl(films, film)
 
     planets = getPlanets()
-    planet = getPlanet(planets, @character)
+    planet = getPlanet(planets, @input)
 
     characters = getAllCharacters()
-    character = getCharacterInfoString(characters, @character)
+    character = getCharacterInfoString(characters, @input)
 
 
 
@@ -63,7 +63,7 @@ post '/' do
   
       "version": "1.0",
       "sessionAttributes": {
-        "input": @character
+        "input": @input
 
       },
       "response": {
