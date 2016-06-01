@@ -42,8 +42,11 @@ post '/' do
       JSON.generate(response)
   elsif defined?(@request_payload['session']['attributes']['input'])
 
+    @name = @request_payload['session']['attributes']['input']
+    puts @name
     puts "You saved an attribute"
-    result = "You saved an attribute."
+    characters = getAllCharacters()
+    result = getCharacterHeight(characters, @name)
 
     response = {
   
@@ -261,6 +264,18 @@ def getCharacterName(characters, name)
     end 
   end 
   return "Sorry. I cannot find that character."
+end 
+
+
+def getCharacterHeight(characters, name)
+  #puts name
+  characters.each do |character|
+    #puts character['name']
+    if name == character['name']
+      return "The height of " + name + " is " + character['height'] + 'centimeters.'
+    end 
+  end 
+  return "Sorry. I cannot find that character's height."
 end 
 
 def getCharacterInfoString(characters, name)
