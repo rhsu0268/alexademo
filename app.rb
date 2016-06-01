@@ -16,8 +16,7 @@ post '/' do
 
   # type == LaunchRequest
   if @request_payload['request']['type'] == 'LaunchRequest'
-    result = 
-    {
+    '{
       "version": "1.0",
       "response": {
         "outputSpeech": {
@@ -26,7 +25,7 @@ post '/' do
         },
         "shouldEndSession": true
       }
-    }
+    }'
   else
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
@@ -34,6 +33,7 @@ post '/' do
     if @request_payload['session'] != nil
       #['request']['session']['attributes']['input']
       result = "You asked for something else."
+
 
       result = {
   
@@ -93,6 +93,7 @@ post '/' do
         }
       }
       JSON.generate(result)
+    end
   end
 end 
 
