@@ -14,16 +14,17 @@ post '/' do
 
   # type == LaunchRequest
   if @request_payload['request']['type'] == 'LaunchRequest'
-    '{
+    result = 
+    {
       "version": "1.0",
       "response": {
         "outputSpeech": {
           "type": "PlainText",
           "text": "Go."
         },
-        "shouldEndSession": false
+        "shouldEndSession": true
       }
-    }'
+    }
   else
     @character = @request_payload['request']['intent']['slots']['person']['value']
     puts @character
