@@ -31,9 +31,7 @@ post '/' do
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
 
-    @userCharacter = @request_payload['request']['session']['attributes']['input']
-    
-    if (@userCharacter) 
+    if @request_payload['request']['session']['attributes']['input']
       result = "You asked for something else."
     else
       species = getSpecies()
