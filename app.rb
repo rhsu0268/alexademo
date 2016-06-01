@@ -40,6 +40,9 @@ post '/' do
         }
       }
       JSON.generate(response)
+  elsif @request_payload['request']['session']['attributes']['input']
+
+    puts "You defined an attribute"
   else
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
@@ -59,7 +62,7 @@ post '/' do
           "type": "PlainText",
           "text": result
          },
-        "shouldEndSession": true
+        "shouldEndSession": false
         }
       }
       JSON.generate(response)
