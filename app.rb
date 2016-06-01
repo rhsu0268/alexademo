@@ -78,8 +78,8 @@ post '/' do
       planet = getPlanet(planets, @input)
 
       characters = getAllCharacters()
-      character = getCharacterInfoString(characters, @input)
-
+      #character = getCharacterInfoString(characters, @input)
+      character = getCharacterName(characters, @input)
 
 
       if specie != "Sorry. I cannot find that species."
@@ -260,7 +260,7 @@ def getCharacterName(characters, name)
   characters.each do |character|
     puts character['name']
     if name == character['name']
-      return name
+      return "What do you want to know about " + name + " ?"
     end 
   end 
   return "Sorry. I cannot find that character."
@@ -272,7 +272,7 @@ def getCharacterHeight(characters, name)
   characters.each do |character|
     #puts character['name']
     if name == character['name']
-      return "The height of " + name + " is " + character['height'] + 'centimeters.'
+      return "The height of " + name + " is " + character['height'] + ' centimeters.'
     end 
   end 
   return "Sorry. I cannot find that character's height."
