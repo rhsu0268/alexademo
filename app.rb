@@ -67,7 +67,7 @@ post '/' do
           "type": "PlainText",
           "text": result
          },
-        "shouldEndSession": true
+        "shouldEndSession": false
       }
     }
     JSON.generate(result)
