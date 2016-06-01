@@ -40,7 +40,7 @@ post '/' do
         }
       }
       JSON.generate(response)
-  elsif @request_payload['request']['session']['attributes']['input']
+  elsif defined?(@request_payload['request']['session']['attributes']['input'])
 
     puts "You saved an attribute"
     result = "You saved an attribute."
