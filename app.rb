@@ -62,6 +62,10 @@ post '/' do
     result = {
   
       "version": "1.0",
+      "sessionAttributes": {
+        "input": @character
+
+      },
       "response": {
         "outputSpeech": {
           "type": "PlainText",
