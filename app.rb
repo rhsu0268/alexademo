@@ -30,7 +30,7 @@ post '/' do
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
 
-    if @request_payload['session'] != nil
+    if @request_payload['session']['attributes']['input'] != nil
       #['request']['session']['attributes']['input']
       result = "You asked for something else."
 
