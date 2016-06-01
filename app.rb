@@ -42,7 +42,21 @@ post '/' do
       JSON.generate(response)
   elsif @request_payload['request']['session']['attributes']['input']
 
-    puts "You defined an attribute"
+    puts "You saved an attribute"
+    result = "You saved an attribute."
+
+    response = {
+  
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": false
+        }
+      }
+    JSON.generate(response)
   else
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
