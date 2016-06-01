@@ -36,31 +36,38 @@ post '/' do
     film = isMovie(@character)
     formattedFilm = getFilmCrawl(films, film)
 
+    planets = getPlanets()
+    planet = getPlanet(planets, @character)
+
     characters = getAllCharacters()
     character = getCharacterInfoString(characters, @character)
+
+
 
     if specie != "Sorry. I cannot find that species."
       result = specie
     elsif formattedFilm != "Sorry. I cannot find that film."
       result = formattedFilm
+    elsif planet != "Sorry. I cannot find that planet."
+      result = planet
     elsif character != "Sorry. I cannot find that character."
       result = character
     else
       result = "I don't know what you are talking about. Try again."
     end 
 
-    result = {
+    # result = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": true
-      }
-    }
-    JSON.generate(result)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": true
+    #   }
+    # }
+    # JSON.generate(result)
   end
 end 
 
@@ -132,6 +139,13 @@ get '/isMovie' do
   movie = isMovie("return of the jedi")
   puts movie 
 end 
+
+get '/get-all-planets' do
+  name = 'Corellia'
+  planets = getPlanets()
+  planet = getPlanet(planets, name)
+  puts planet
+end
 
 def queryStarWarsForCharacters(name)
   url = 'http://swapi.co/api/people'
@@ -341,3 +355,39 @@ def getSpecie(species, name)
   return "Sorry. I cannot find that species."
 end
 
+
+def getPlanets()
+  planetsList = []
+
+  i = 1
+
+  while i < 8 do 
+
+    puts("Loop ") 
+    url_page = 'http://swapi.co/api/planets/?page=' + i.to_s
+    puts url_page
+    planets = HTTParty.get(url_page)['results']
+    #puts "---Characters---"
+    #puts characters
+
+    planets.each do |planet|
+      puts planet
+      planetsList << planet
+    end 
+
+    i += 1
+
+  end 
+  #puts charactersList
+  return planetsList
+end
+
+def getPlanet(planets, name)
+  planets.each do |planet|
+    puts planet['name']
+    if name == planet['name']
+      return "You want to know about " + planet['name'] + "." 
+    end 
+  end 
+  return "Sorry. I cannot find that planet."
+end
