@@ -56,18 +56,18 @@ post '/' do
       result = "I don't know what you are talking about. Try again."
     end 
 
-    # result = {
+    result = {
   
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": result
-    #      },
-    #     "shouldEndSession": true
-    #   }
-    # }
-    # JSON.generate(result)
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": result
+         },
+        "shouldEndSession": true
+      }
+    }
+    JSON.generate(result)
   end
 end 
 
