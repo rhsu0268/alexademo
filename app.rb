@@ -32,6 +32,8 @@ post '/' do
 
     if defined?(@request_payload['session']['attributes'])
       #['request']['session']['attributes']['input']
+
+      puts @request_payload['session']['attributes']
       result = "You asked for something else."
 
 
