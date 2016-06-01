@@ -58,6 +58,8 @@ post '/' do
       }
     JSON.generate(response)
   else
+
+    puts "---NEW SESSION---"
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
 
