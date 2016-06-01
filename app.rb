@@ -30,33 +30,37 @@ post '/' do
   else
     @input = @request_payload['request']['intent']['slots']['person']['value']
     puts @input
-
-    species = getSpecies()
-    specie = getSpecie(species, @input)
-
-
-    films = getFilms()
-    film = isMovie(@input)
-    formattedFilm = getFilmCrawl(films, film)
-
-    planets = getPlanets()
-    planet = getPlanet(planets, @input)
-
-    characters = getAllCharacters()
-    character = getCharacterInfoString(characters, @input)
-
-
-
-    if specie != "Sorry. I cannot find that species."
-      result = specie
-    elsif formattedFilm != "Sorry. I cannot find that film."
-      result = formattedFilm
-    elsif planet != "Sorry. I cannot find that planet."
-      result = planet
-    elsif character != "Sorry. I cannot find that character."
-      result = character
+    
+    if (@input) 
+      result = "You asked for something else."
     else
-      result = "I don't know what you are talking about. Try again."
+      species = getSpecies()
+      specie = getSpecie(species, @input)
+
+
+      films = getFilms()
+      film = isMovie(@input)
+      formattedFilm = getFilmCrawl(films, film)
+
+      planets = getPlanets()
+      planet = getPlanet(planets, @input)
+
+      characters = getAllCharacters()
+      character = getCharacterInfoString(characters, @input)
+
+
+
+      if specie != "Sorry. I cannot find that species."
+        result = specie
+      elsif formattedFilm != "Sorry. I cannot find that film."
+        result = formattedFilm
+      elsif planet != "Sorry. I cannot find that planet."
+        result = planet
+      elsif character != "Sorry. I cannot find that character."
+        result = character
+      else
+        result = "I don't know what you are talking about. Try again."
+      end 
     end 
 
     result = {
