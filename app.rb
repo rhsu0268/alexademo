@@ -50,7 +50,7 @@ post '/' do
       result = getCharacterHairColor(characters, @name)
     end
     
-    response = storeSessionAttribute(@name, result, false)
+    response = storeSessionAttribute(@name, result, false, false)
     JSON.generate(response)
   # check that the intent is for character
   elsif @request_payload['request']['intent']['name'] == 'character'
@@ -87,7 +87,7 @@ post '/' do
         result = "I don't know what you are talking about. Try again."
       end 
   
-      response = storeSessionAttribute(@input, result, false)
+      response = storeSessionAttribute(@input, result, true, false)
       JSON.generate(response)
 
   end
@@ -226,21 +226,23 @@ def returnJSON(text, option)
 end 
 
 
-def storeSessionAttribute(input, result, session)
+def storeSessionAttribute(input, result, newSession, endSession)
   json = JSON.parse(
   '{
 
     "version": "1.0",
-    "sessionAttributes": {
+    "session": {
+      "new": "' + newSession + '"
+      "attributes": {
       "input": "' + input + '"
-
+      }
     },
     "response": {
       "outputSpeech": {
         "type": "PlainText",
         "text": "' + result + '"
        },
-      "shouldEndSession": " ' + to_sb(session) + ' "
+      "shouldEndSession": " ' + to_sb(endSession) + ' "
     }
   }')
 end 
