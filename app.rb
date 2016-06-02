@@ -33,7 +33,8 @@ post '/' do
     
     response = returnJSON("Goodbye. See you later...", true)
     JSON.generate(response)
-  elsif defined?(@request_payload['session']['attributes']['input'])
+  elsif defined?(@request_payload['session']['attributes']['input']) and 
+    !defined?(@request_payload['request']['intent']['slots']['person']['value'])
 
     @name = @request_payload['session']['attributes']['input']
     puts @name
