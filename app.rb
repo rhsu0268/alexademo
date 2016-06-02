@@ -52,7 +52,8 @@ post '/' do
     
     response = storeSessionAttribute(@name, result, false)
     JSON.generate(response)
-  else
+  # check that the intent is for character
+  elsif @request_payload['request']['intent']['name'] == 'character'
 
     puts "---NEW SESSION---"
     @input = @request_payload['request']['intent']['slots']['person']['value']
