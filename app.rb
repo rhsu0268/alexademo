@@ -248,7 +248,7 @@ def returnJSON(text, option)
     "response": {
       "outputSpeech": {
         "type": "PlainText",
-        "text": " ' + text + ' "
+        "text": "' + text + '"
        },
       "shouldEndSession": " ' + to_sb(option) + ' "
       }
@@ -262,13 +262,13 @@ def storeSessionAttribute(input, result)
 
     "version": "1.0",
     "sessionAttributes": {
-      "input": " ' + input + ' "
+      "input": "' + input + '"
 
     },
     "response": {
       "outputSpeech": {
         "type": "PlainText",
-        "text": " ' + result + ' "
+        "text": "' + result + '"
        },
       "shouldEndSession": " ' + to_sb(false) + ' "
     }
