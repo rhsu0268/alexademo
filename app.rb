@@ -232,7 +232,7 @@ def storeSessionAttribute(input, result, newSession, endSession)
 
     "version": "1.0",
     "session": {
-      "new": "' + newSession + '"
+      "new": "' + to_sb(newSession) + '",
       "attributes": {
       "input": "' + input + '"
       }
@@ -242,7 +242,7 @@ def storeSessionAttribute(input, result, newSession, endSession)
         "type": "PlainText",
         "text": "' + result + '"
        },
-      "shouldEndSession": " ' + to_sb(endSession) + ' "
+      "shouldEndSession": "' + to_sb(endSession) + '"
     }
   }')
 end 
