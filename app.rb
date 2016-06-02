@@ -117,7 +117,7 @@ post '/' do
       #   }
       # }
       # JSON.generate(response)
-      response = returnJSON(result, false)
+      response = storeSessionAttribute(@input)
       JSON.generate(response)
 
   end
@@ -254,10 +254,30 @@ def returnJSON(text, option)
     }')
 end 
 
+
+def storeSessionAttribute(input)
+  json = JSON.parse(
+  '{
+
+    "version": "1.0",
+    "sessionAttributes": {
+      "input": " ' + input + ' "
+
+    },
+    "response": {
+      "outputSpeech": {
+        "type": "PlainText",
+        "text": result
+       },
+      "shouldEndSession": " ' + to_sb(false) + ' "
+    }
+  }')
+end 
+
 def to_sb(option)
-    if option == true
-      return 'true'
-    else
-      return 'false'
-    end 
+  if option == true
+    return 'true'
+  else
+    return 'false'
+  end 
 end 
