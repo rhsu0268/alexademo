@@ -171,7 +171,7 @@ end
 
 get '/get-json' do
   #puts returnJSON("hello world", true)
-  puts storeSessionAttribute("Luke Skywalker", "Test")
+  puts storeSessionAttribute("Luke Skywalker", "Test", true, false)
 end
 
 
