@@ -232,10 +232,10 @@ def storeSessionAttribute(input, result, newSession, endSession)
 
     "version": "1.0",
     "session": {
-      "new": "' + to_sb(newSession) + '",
-      "sessionAttributes": {
+      "new": "' + to_sb(newSession) + '"
+    },
+    "sessionAttributes": {
       "input": "' + input + '"
-      }
     },
     "response": {
       "outputSpeech": {
