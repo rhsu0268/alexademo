@@ -6,16 +6,6 @@ class Character
 
 end
 
-
-
-
-
-
-
-
-
-
-
 def queryStarWarsForCharacters(name)
   url = 'http://swapi.co/api/people'
   puts url 
@@ -102,6 +92,16 @@ def getCharacterHeight(characters, name)
   end 
   return "Sorry. I cannot find that character's height."
 end 
+
+def getCharacterHairColor(characters, name)
+  characters.each do |character|
+    #puts character['name']
+    if name == character['name']
+      return "The hair color of " + name + " is " + character['hair_color'] + '. Anything else?'
+    end 
+  end 
+  return "Sorry. I cannot find that character's height."
+end
 
 def getCharacterInfoString(characters, name)
   puts name

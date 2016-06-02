@@ -42,9 +42,13 @@ post '/' do
     # get the intent 
     @intent = @request_payload['request']['intent']['name']
     puts @intent
-    characters = getAllCharacters()
-    result = getCharacterHeight(characters, @name)
-
+    if @intent == "height"
+      characters = getAllCharacters()
+      result = getCharacterHeight(characters, @name)
+    elsif @intent == "hair_color"
+      characters = getAllCharacters()
+      result = getCharacterHairColor(characters, @name)
+    end
     
     response = returnJSON(result, false)
     JSON.generate(response)
