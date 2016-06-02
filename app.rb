@@ -117,7 +117,7 @@ post '/' do
       #   }
       # }
       # JSON.generate(response)
-      response = storeSessionAttribute(@input)
+      response = storeSessionAttribute(@input, result)
       JSON.generate(response)
 
   end
@@ -200,7 +200,8 @@ get '/get-all-planets' do
 end
 
 get '/get-json' do
-  puts returnJSON("hello world", true)
+  #puts returnJSON("hello world", true)
+  puts storeSessionAttribute("Luke Skywalker", "Test")
 end
 
 
@@ -255,7 +256,7 @@ def returnJSON(text, option)
 end 
 
 
-def storeSessionAttribute(input)
+def storeSessionAttribute(input, result)
   json = JSON.parse(
   '{
 
@@ -267,7 +268,7 @@ def storeSessionAttribute(input)
     "response": {
       "outputSpeech": {
         "type": "PlainText",
-        "text": result
+        "text": " ' + result + ' "
        },
       "shouldEndSession": " ' + to_sb(false) + ' "
     }
