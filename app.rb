@@ -30,18 +30,20 @@ post '/' do
     }'
   elsif @request_payload['request']['intent']['name'] == 'AMAZON.CancelIntent'
 
-    response = {
+    # response = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": "Goodbye. See you later..."
-         },
-        "shouldEndSession": true
-        }
-      }
-      JSON.generate(response)
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": "Goodbye. See you later..."
+    #      },
+    #     "shouldEndSession": true
+    #     }
+    #   }
+    #   JSON.generate(response)
+    response = returnJSON("Goodbye. See you later...", true)
+    JSON.generate(response)
   elsif defined?(@request_payload['session']['attributes']['input'])
 
     @name = @request_payload['session']['attributes']['input']
@@ -50,17 +52,19 @@ post '/' do
     characters = getAllCharacters()
     result = getCharacterHeight(characters, @name)
 
-    response = {
+    # response = {
   
-      "version": "1.0",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": result
-         },
-        "shouldEndSession": false
-        }
-      }
+    #   "version": "1.0",
+    #   "response": {
+    #     "outputSpeech": {
+    #       "type": "PlainText",
+    #       "text": result
+    #      },
+    #     "shouldEndSession": false
+    #     }
+    #   }
+    # JSON.generate(response)
+    response = returnJSON(result, false)
     JSON.generate(response)
   else
 
@@ -97,21 +101,23 @@ post '/' do
       end 
   
 
-      response = {
+      # response = {
     
-        "version": "1.0",
-        "sessionAttributes": {
-          "input": @input
+      #   "version": "1.0",
+      #   "sessionAttributes": {
+      #     "input": @input
 
-        },
-        "response": {
-          "outputSpeech": {
-            "type": "PlainText",
-            "text": result
-           },
-          "shouldEndSession": false
-        }
-      }
+      #   },
+      #   "response": {
+      #     "outputSpeech": {
+      #       "type": "PlainText",
+      #       "text": result
+      #      },
+      #     "shouldEndSession": false
+      #   }
+      # }
+      # JSON.generate(response)
+      response = returnJSON(result, false)
       JSON.generate(response)
 
   end
@@ -193,6 +199,9 @@ get '/get-all-planets' do
   puts planet
 end
 
+get '/get-json' do
+  puts returnJSON("hello world", true)
+end
 
 
 
@@ -227,45 +236,28 @@ def getDescription(name)
 
 end
 
-
-
-
-
-def getPlanets()
-  planetsList = []
-
-  i = 1
-
-  while i < 8 do 
-
-    puts("Loop ") 
-    url_page = 'http://swapi.co/api/planets/?page=' + i.to_s
-    puts url_page
-    planets = HTTParty.get(url_page)['results']
-    #puts "---Characters---"
-    #puts characters
-
-    planets.each do |planet|
-      puts planet
-      planetsList << planet
-    end 
-
-    i += 1
-
-  end 
-  #puts charactersList
-  return planetsList
-end
-
-def getPlanet(planets, name)
-  planets.each do |planet|
-    puts planet['name']
-    if name == planet['name']
-      return "You want to know about " + planet['name'] + "." 
-    end 
-  end 
-  return "Sorry. I cannot find that planet."
-end
-
-
  
+
+
+def returnJSON(text, option)
+    json = JSON.parse(
+    '{
+  
+    "version": "1.0",
+    "response": {
+      "outputSpeech": {
+        "type": "PlainText",
+        "text": " ' + text + ' "
+       },
+      "shouldEndSession": " ' + to_sb(option) + ' "
+      }
+    }')
+end 
+
+def to_sb(option)
+    if option == true
+      return 'true'
+    else
+      return 'false'
+    end 
+end 

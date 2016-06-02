@@ -130,3 +130,14 @@ def getCharacterInfoField(characters, name, option)
 end 
 
 
+def getCharacterHairColor(characters, name)
+  #puts name
+  characters.each do |character|
+    #puts character['name']
+    if name == character['name']
+      return "The hair color of " + name + " is " + character['hair_color'] + '. Anything else?'
+    end 
+  end 
+  return "Sorry. I cannot find that character's hair color."
+end 
+
