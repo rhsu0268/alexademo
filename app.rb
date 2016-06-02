@@ -50,7 +50,7 @@ post '/' do
       result = getCharacterHairColor(characters, @name)
     end
     
-    response = returnJSON(result, false)
+    response = storeSessionAttribute(@name, result, false)
     JSON.generate(response)
   else
 
@@ -86,7 +86,7 @@ post '/' do
         result = "I don't know what you are talking about. Try again."
       end 
   
-      response = storeSessionAttribute(@input, result)
+      response = storeSessionAttribute(@input, result, false)
       JSON.generate(response)
 
   end
@@ -225,7 +225,7 @@ def returnJSON(text, option)
 end 
 
 
-def storeSessionAttribute(input, result)
+def storeSessionAttribute(input, result, session)
   json = JSON.parse(
   '{
 
@@ -239,7 +239,7 @@ def storeSessionAttribute(input, result)
         "type": "PlainText",
         "text": "' + result + '"
        },
-      "shouldEndSession": " ' + to_sb(false) + ' "
+      "shouldEndSession": " ' + to_sb(session) + ' "
     }
   }')
 end 
