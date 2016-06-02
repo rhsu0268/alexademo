@@ -68,7 +68,7 @@ def getAllCharacters()
     #puts characters
 
     characters.each do |character|
-      #puts character['name']
+      puts character['name']
       charactersList << character
     end 
 

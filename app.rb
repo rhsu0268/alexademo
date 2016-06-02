@@ -30,18 +30,7 @@ post '/' do
     }'
   elsif @request_payload['request']['intent']['name'] == 'AMAZON.CancelIntent'
 
-    # response = {
-  
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": "Goodbye. See you later..."
-    #      },
-    #     "shouldEndSession": true
-    #     }
-    #   }
-    #   JSON.generate(response)
+    
     response = returnJSON("Goodbye. See you later...", true)
     JSON.generate(response)
   elsif defined?(@request_payload['session']['attributes']['input'])
@@ -49,21 +38,14 @@ post '/' do
     @name = @request_payload['session']['attributes']['input']
     puts @name
     puts "You saved an attribute"
+
+    # get the intent 
+    @intent = @request_payload['request']['intent']['name']
+    puts @intent
     characters = getAllCharacters()
     result = getCharacterHeight(characters, @name)
 
-    # response = {
-  
-    #   "version": "1.0",
-    #   "response": {
-    #     "outputSpeech": {
-    #       "type": "PlainText",
-    #       "text": result
-    #      },
-    #     "shouldEndSession": false
-    #     }
-    #   }
-    # JSON.generate(response)
+    
     response = returnJSON(result, false)
     JSON.generate(response)
   else
@@ -100,23 +82,6 @@ post '/' do
         result = "I don't know what you are talking about. Try again."
       end 
   
-
-      # response = {
-    
-      #   "version": "1.0",
-      #   "sessionAttributes": {
-      #     "input": @input
-
-      #   },
-      #   "response": {
-      #     "outputSpeech": {
-      #       "type": "PlainText",
-      #       "text": result
-      #      },
-      #     "shouldEndSession": false
-      #   }
-      # }
-      # JSON.generate(response)
       response = storeSessionAttribute(@input, result)
       JSON.generate(response)
 
@@ -138,7 +103,7 @@ end
 get '/query-all-characters' do
   name = "Luke Skywalker"
   characters = getAllCharacters()
-  character = getCharacterName(characters, name)
+  puts characters
 end
 
 
